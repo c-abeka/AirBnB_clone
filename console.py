@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-""" 
+"""
     The Console
-    
     The console controls all databases can
     create, modify or delete instances.
 """
@@ -19,8 +18,8 @@ from models.base_model import BaseModel
 import shlex
 
 classes = {
-        "BaseModel":BaseModel, 
-        "Amenity": Amenity, 
+        "BaseModel": BaseModel,
+        "Amenity": Amenity,
         "City": City,
         "Place": Place,
         "Review": Review,
@@ -37,7 +36,7 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, arg):
         """ Exits console """
         return True
-    
+
     def emptyline(self):
         """ Ovewrites empty line method"""
         return False
@@ -45,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, arg):
         """ Quit command exits the program"""
         return True
-    
+
     def _key_value_parser(self, args):
         """ Creates a dict object form a list of strings """
         new_dict = {}
@@ -59,17 +58,16 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     try:
                         value = int(value)
-                    except:
+                    except Exception:
                         try:
                             value = float(value)
-                        except:
+                        except Exception:
                             continue
                 new_dict[key] = value
         return new_dict
 
     def do_create(self, arg):
         """ Creates a new instance of a model """
-        
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -84,9 +82,9 @@ class HBNBCommand(cmd.Cmd):
         instance.save()
 
     def do_show(self, arg):
-        """ 
-            Prints a string format of a class instance 
-            based on class and id 
+        """
+            Prints a string format of a class instance
+            based on class and id
         """
 
         args = shlex.split(arg)
